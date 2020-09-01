@@ -1,0 +1,11 @@
+{
+  "name": "5h2sjd--run",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "@polymer/paper-button": "^3.0.1",
+    "@polymer/paper-card": "^3.0.1",
+    "@webcomponents/webcomponentsjs": "2.4.4",
+    "lit-element": "2.4.0"
+  }
+}
