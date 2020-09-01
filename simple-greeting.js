@@ -1,11 +1,10 @@
 import { LitElement, html } from 'lit-element';
 
+const name = 'Mau';
 const footerTemplate = html`
-<footer>
+<footer>Made with love by ${name} </footer>
 `;
 class SimpleGreeting extends LitElement {
-
-
   static get properties() {
     return { 
       todos: { 
@@ -32,7 +31,7 @@ class SimpleGreeting extends LitElement {
       ${this.todos.map(
         todo => html`
         <li>
-        <button type="checkbox" .checked=${todo.finished} @change=${e => this._changeTodoFinished(e, todo)}> X </button>
+        <input type="checkbox" .checked=${todo.finished} @change=${e => this._changeTodoFinished(e, todo)} />
         ${todo.text} (${todo.finished ? 'finished' : 'unfinished'})
         <button @click="${() => this._removeTodo(todo)}"> X </button>
         
