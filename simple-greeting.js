@@ -1,10 +1,41 @@
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
+import './todo-list.js'
 
 const name = 'Mau';
 const footerTemplate = html`
 <footer>Made with love by ${name} </footer>
 `;
 class SimpleGreeting extends LitElement {
+  static get styles() {
+    return css`
+      :host {
+        display: block;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        background: radial-gradient(circle at top left,#a9e235 0,#4dff91 50%,#04e5f0 100%);
+        height: 100vh;
+      }
+      .btn-agregar {
+        display: inline-block;
+        padding: 0px;
+        width: 3rem;
+        height: 1.5rem;
+        background-color: teal;
+        color: white;
+      }
+      .input-agregar {
+        display: inline;
+        background: transparent;
+        color: white;
+        border: none;
+        border-bottom: 2px solid rgb(221, 221, 221);
+        outline: none;
+        width: 100%;
+        line-height: 2rem;
+        font-size: 1rem;
+      }
+    `;
+  }
+
   static get properties() {
     return { 
       todos: { 
@@ -25,20 +56,15 @@ class SimpleGreeting extends LitElement {
   render() {
     return html`
     <h1>Todo App</h1>
-    <input id="addTodoInput" placeholder="Name" />
-    <button @click="${this._addTodo}"> Añadir </button>
-    <ol>
-      ${this.todos.map(
-        todo => html`
-        <li>
-        <input type="checkbox" .checked=${todo.finished} @change=${e => this._changeTodoFinished(e, todo)} />
-        ${todo.text} (${todo.finished ? 'finished' : 'unfinished'})
-        <button @click="${() => this._removeTodo(todo)}"> X </button>
-        
-        </li>
-        `
-      )}
-    </ol>
+    <input class="input-agregar" id="addTodoInput" placeholder="Name" />
+    <button class="btn-agregar" @click="${this._addTodo}"> Añadir </button>
+
+    <todo-list
+      .todos="${this.todos}"
+    >
+    </todo-list>
+
+  
     ${footerTemplate}
     `;
   }
