@@ -44,13 +44,13 @@ class TodoList extends LitElement {
   }
 
   _changeTodoFinished(e, changedTodo) {
-  const eventDetails = { changedTodo, finished: e.target.checked };
-  this.dispatchEvent(new CustomEvent('change-todo-finished', { detail: eventDetails }));
-}
+    const eventDetails = { changedTodo, finished: e.target.checked };
+    this.dispatchEvent(new CustomEvent('change-todo-finished', { detail: eventDetails }));
+  }
 
-_removeTodo(item) {
-  this.dispatchEvent(new CustomEvent('remove-todo', { detail: item }));
-}
+  _removeTodo(item) {
+    this.dispatchEvent(new CustomEvent('remove-todo', { detail: item }));
+  }
 }
 
 

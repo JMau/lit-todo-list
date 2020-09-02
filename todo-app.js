@@ -5,7 +5,7 @@ const name = 'Mau';
 const footerTemplate = html`
 <footer>Made with love by ${name} </footer>
 `;
-class SimpleGreeting extends LitElement {
+class TodoApp extends LitElement {
   static get styles() {
     return css`
       :host {
@@ -61,6 +61,8 @@ class SimpleGreeting extends LitElement {
 
     <todo-list
       .todos="${this.todos}"
+      @change-todo-finished="${this._changeTodoFinished}"
+      @remove-todo="${this._removeTodo}"
     >
     </todo-list>
 
@@ -80,19 +82,24 @@ class SimpleGreeting extends LitElement {
     // this.requestUpdate();
   }
 
-  _removeTodo(todo){
-    this.todos = this.todos.filter(e => e !== todo);
+  // _removeTodo(todo){
+  //   this.todos = this.todos.filter(e => e !== todo);
+  // }
+  _removeTodo(e){
+    this.todos = this.todos.filter(todo => todo !== e.detail);
   }
 
-  _changeTodoFinished(e, changeTodo){
-    const finished= e.target.checked;
+    // _changeTodoFinished(e, changeTodo){
+    // const finished= e.target.checked;
+  _changeTodoFinished(e){
+    const {changedTodo, finished}= e.detail;
     this.todos = this.todos.map(todo => {
-      if(todo !== changeTodo){
+      if(todo !== changedTodo){
         return todo;
       }
-      return {...changeTodo, finished}
+      return {...changedTodo, finished}
     })
   }
 }
 
-customElements.define('simple-greeting', SimpleGreeting);
+customElements.define('todo-app', TodoApp);
